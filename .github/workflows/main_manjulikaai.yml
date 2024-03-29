@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - manjulikaAI
+name: Build and deploy Python app to Azure Web App - ManjulikaAI
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Create and start virtual environment
         run: |
@@ -65,14 +65,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4E5324C5C4F441629293B063BCCA950D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E95AF6E39D7A4AAABF7BC649B41C1035 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CC7CE1D553C8447FA62F7DC3F839556E }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_564F5E66BFF64C469604109EBEFB5AA1 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1F7E74231D614BB1863B390FFAED5E5E }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6AB5583FEF484251B6EB347191972C81 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'manjulikaAI'
+          app-name: 'ManjulikaAI'
           slot-name: 'Production'
           
