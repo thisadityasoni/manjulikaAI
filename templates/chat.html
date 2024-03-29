@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manjulika AI</title>
+  <link rel="stylesheet" href="/static/chat.css">
+</head>
+<body>
+  <section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i> Manjulika AI
+      </div>
+    </header>
+  
+    <main class="msger-chat">
+      <!-- Chat messages will be inserted here dynamically -->
+    </main>
+  
+    <form class="msger-inputarea" id="chat-form" action="/chat" method="post">
+      <input type="text" class="msger-input" id="user-input" name="user_input" placeholder="Enter your message...">
+      <button type="submit" class="msger-send-btn">Send</button>
+    </form>
+  </section>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script src="/static/chat.js"></script>
+</body>
+</html>
