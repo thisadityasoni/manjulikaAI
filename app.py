@@ -16,7 +16,14 @@ load_dotenv()
 
 firebase_config_str = os.getenv('firebaseConfig')
 
-firebase_config = json.loads(firebase_config_str)
+if firebase_config_str is None or not firebase_config_str.strip():
+    raise ValueError("Firebase configuration is not set in environment variable firebaseConfig")
+
+# Load Firebase configuration from JSON string
+try:
+    firebase_config = json.loads(firebase_config_str)
+except json.JSONDecodeError as e:
+    raise ValueError("Invalid JSON format in firebaseConfig environment variable") from e
 
 firebase = pyrebase.initialize_app(firebase_config)
 auth = firebase.auth()
