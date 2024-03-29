@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_session import Session
 import pyrebase
-from dotenv import load_dotenv
 import os
-import json
 from src.manjulika import chatmanjulika
 
 app = Flask(__name__)
@@ -12,20 +10,9 @@ app.config['SESSION_TYPE'] = 'filesystem'  # Change to other session type if nee
 
 Session(app)
 
-load_dotenv()
+firebaseConfig={"apiKey": "AIzaSyCJw0mOOFOh6vxUeFp_a3w5SUOdOeS9eWY", "authDomain": "manjulikaai.firebaseapp.com", "databaseURL": "https://manjulikaai-default-rtdb.firebaseio.com", "projectId": "manjulikaai", "storageBucket": "manjulikaai.appspot.com", "messagingSenderId": "321800617494", "appId": "1:321800617494:web:8a831fe1611769baf4bf37", "measurementId": "G-EZVQ39H1EY"}
 
-firebase_config_str = os.getenv('firebaseConfig')
-
-if firebase_config_str is None or not firebase_config_str.strip():
-    raise ValueError("Firebase configuration is not set in environment variable firebaseConfig")
-
-# Load Firebase configuration from JSON string
-try:
-    firebase_config = json.loads(firebase_config_str)
-except json.JSONDecodeError as e:
-    raise ValueError("Invalid JSON format in firebaseConfig environment variable") from e
-
-firebase = pyrebase.initialize_app(firebase_config)
+firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 db = firebase.database()
 
