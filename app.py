@@ -6,9 +6,7 @@ from src.manjulika import chatmanjulika
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Set secret key for session
-app.config['SESSION_TYPE'] = 'filesystem'  # Change to other session type if needed
 
-Session(app)
 
 firebaseConfig={"apiKey": "AIzaSyCJw0mOOFOh6vxUeFp_a3w5SUOdOeS9eWY", "authDomain": "manjulikaai.firebaseapp.com", "databaseURL": "https://manjulikaai-default-rtdb.firebaseio.com", "projectId": "manjulikaai", "storageBucket": "manjulikaai.appspot.com", "messagingSenderId": "321800617494", "appId": "1:321800617494:web:8a831fe1611769baf4bf37", "measurementId": "G-EZVQ39H1EY"}
 
@@ -95,8 +93,6 @@ def chat():
         return response
     else:
         return render_template('chat.html')
-
-
 
 
 if __name__ == '__main__':
