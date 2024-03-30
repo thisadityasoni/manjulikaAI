@@ -1,10 +1,8 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from dotenv import load_dotenv
 
-
-load_dotenv()
+GOOGLE_API_KEY = "AIzaSyAb0Hu0FTh4B4e6sONeWdxHhuCPKADLiYk"
 
 
 def chatmanjulika(human_input):
