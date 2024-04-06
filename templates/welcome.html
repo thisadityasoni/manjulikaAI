@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manjulika's Options</title>
+    <link rel="stylesheet" href="/static/welcome.css">
+</head>
+<body>
+    <div class="container">
+        <div class="options-grid">
+            <div class="option-card">
+                <div class="option-content">
+                    <h2 class="option-title">Manjulika, the Friendly Bhoot</h2>
+                    <p class="option-description">Are you looking for a friendly ghost to chat with? Manjulika, the friendly bhoot, is here to listen to you and offer her spectral advice.</p>
+                    <a href="{{ url_for('manjulika') }}" class="option-btn">Chat</a>
+                </div>
+            </div>
+            <div class="option-card">
+                <div class="option-content">
+                    <h2 class="option-title">Doraemon, the Helpful Robot Cat</h2>
+                    <p class="option-description">Need assistance with anything? Doraemon, the helpful robot cat, is here to lend you a paw with his futuristic gadgets and cheerful demeanor.</p>
+                    <a href="{{ url_for('doraemon') }}" class="option-btn">Chat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,47 +1,27 @@
-const msgerChat = document.querySelector(".msger-chat");
-const chatForm = document.getElementById("chat-form");
-const userInput = document.getElementById("user-input");
+const forms = document.querySelector(".forms"),
+pwShowHide = document.querySelectorAll(".eye-icon"),
+links = document.querySelectorAll(".link");
 
-chatForm.addEventListener("submit", event => {
-  event.preventDefault();
-
-  const msgText = userInput.value.trim();
-  if (!msgText) return;
-
-  appendMessage("You", "right", msgText);
-  userInput.value = "";
-
-  fetch(chatForm.action, {
-    method: 'POST',
-    body: new URLSearchParams(new FormData(chatForm))
+pwShowHide.forEach(eyeIcon => {
+eyeIcon.addEventListener("click", () => {
+  let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
+  
+  pwFields.forEach(password => {
+      if(password.type === "password"){
+          password.type = "text";
+          eyeIcon.classList.replace("bx-hide", "bx-show");
+          return;
+      }
+      password.type = "password";
+      eyeIcon.classList.replace("bx-show", "bx-hide");
   })
-  .then(response => response.text())
-  .then(data => {
-    appendMessage("Manjulika", "left", data);
-  })
-  .catch(error => console.error('Error:', error));
-});
+  
+})
+})      
 
-function appendMessage(name, side, text) {
-  const msgHTML = `
-    <div class="msg ${side}-msg">
-      <div class="msg-bubble">
-        <div class="msg-info">
-          <div class="msg-info-name">${name}</div>
-          <div class="msg-info-time">${formatDate(new Date())}</div>
-        </div>
-        <div class="msg-text">${text}</div>
-      </div>
-    </div>
-  `;
-
-  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
-  msgerChat.scrollTop = msgerChat.scrollHeight;
-}
-
-function formatDate(date) {
-  const h = "0" + date.getHours();
-  const m = "0" + date.getMinutes();
-
-  return `${h.slice(-2)}:${m.slice(-2)}`;
-}
+links.forEach(link => {
+link.addEventListener("click", e => {
+ e.preventDefault(); //preventing form submit
+ forms.classList.toggle("show-signup");
+})
+})

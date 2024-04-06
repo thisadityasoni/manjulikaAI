@@ -13,19 +13,19 @@ generation_config = {
 safety_settings = [
   {
     "category": "HARM_CATEGORY_HARASSMENT",
-    "threshold": "BLOCK_ONLY_HIGH"
+    "threshold": "BLOCK_NONE"
   },
   {
     "category": "HARM_CATEGORY_HATE_SPEECH",
-    "threshold": "BLOCK_ONLY_HIGH"
+    "threshold": "BLOCK_NONE"
   },
   {
     "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-    "threshold": "BLOCK_ONLY_HIGH"
+    "threshold": "BLOCK_NONE"
   },
   {
     "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-    "threshold": "BLOCK_ONLY_HIGH"
+    "threshold": "BLOCK_NONE"
   },
 ]
 
@@ -47,7 +47,11 @@ def chatmanjulika(user_input):
     
     response = model.generate_content(prompt_parts)
     
-    return response.candidates[0].content.parts[0].text 
+    manjulika_response= response.candidates[0].content.parts[0].text 
+
+    cleaned_response = manjulika_response.replace("**Manjulika**: ", "")
+    
+    return cleaned_response
 
 """user_input = input("You: ")
 response = chatmanjulika(user_input)
