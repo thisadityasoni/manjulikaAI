@@ -5,14 +5,16 @@ import os
 from datetime import datetime
 from src.manjulika import chatmanjulika
 from src.doraemon import chatdoraemon
+from dotenv import load_dotenv
+import json
 import re
 
+load_dotenv()
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Set secret key for session
+app.secret_key = os.urandom(24)  
 
 
-firebaseConfig={"apiKey": "AIzaSyCJw0mOOFOh6vxUeFp_a3w5SUOdOeS9eWY", "authDomain": "manjulikaai.firebaseapp.com", "databaseURL": "https://manjulikaai-default-rtdb.firebaseio.com", "projectId": "manjulikaai", "storageBucket": "manjulikaai.appspot.com", "messagingSenderId": "321800617494", "appId": "1:321800617494:web:8a831fe1611769baf4bf37", "measurementId": "G-EZVQ39H1EY"}
-
+firebaseConfig=json.loads(os.getenv("FirebaseConfig"))
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 db = firebase.database()
@@ -69,7 +71,7 @@ def sign_up():
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     if 'user' in session:
-        return redirect(url_for('welcome'))  # If user is already logged in, redirect to chat page
+        return redirect(url_for('welcome'))  
 
     if request.method == "POST":
         email = request.form['email']
@@ -85,7 +87,7 @@ def forgot_password():
     
 
 def sanitize_email(email):
-    # Replace characters not allowed in Firebase paths
+  
     return re.sub(r'[@\.#$\[\]]', '_', email)
 
 @app.route('/welcome', methods=['GET', 'POST'])
@@ -101,14 +103,9 @@ def manjulika():
     if request.method == 'POST':
         user_input = request.form['user_input']
         response = chatmanjulika(user_input)
-
-        # Get user's email from session
         user_email = session['user']['email']
-
-        # Sanitize the user's email address
         sanitized_email = sanitize_email(user_email)
 
-        # Save conversation in Firebase under the sanitized user's email
         db.child("manjulikachat").child(sanitized_email).child("conversations").push({
             "user_email": user_email,
             "user_input": user_input,
@@ -129,14 +126,9 @@ def doraemon():
     if request.method == 'POST':
         user_input = request.form['user_input']
         response = chatdoraemon(user_input)
-
-        # Get user's email from session
         user_email = session['user']['email']
-
-        # Sanitize the user's email address
         sanitized_email = sanitize_email(user_email)
 
-        # Save conversation in Firebase under the sanitized user's email
         db.child("doraemonchat").child(sanitized_email).child("conversations").push({
             "user_email": user_email,
             "user_input": user_input,
